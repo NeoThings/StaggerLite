@@ -9,9 +9,4 @@ neobot_comm/
 neobot_manager/
 
 neobot_sensors/
-neobot_models/
-
-path_generator/
-path_tracking/
-
 neobot_kits/

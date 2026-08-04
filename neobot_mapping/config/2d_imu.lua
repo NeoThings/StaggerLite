@@ -20,7 +20,7 @@ options = {
   trajectory_builder = TRAJECTORY_BUILDER,
   map_frame = "map",
   tracking_frame = "imu_link",
-  published_frame = "base_footprint",
+  published_frame = "base_link",
   odom_frame = "odom",
   provide_odom_frame = false,
   publish_frame_projected_to_2d = true,
@@ -54,6 +54,8 @@ TRAJECTORY_BUILDER_2D.motion_filter.max_angle_radians = math.rad(0.1)
 TRAJECTORY_BUILDER_2D.submaps.num_range_data = 90
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 100 * 40  -- original is 100 * 40
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 1 * 10
+TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.linear_search_window = 0.2
+TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.angular_search_window = math.rad(45.)
 
 POSE_GRAPH.optimize_every_n_nodes = 90
 POSE_GRAPH.optimization_problem.huber_scale = 1e2

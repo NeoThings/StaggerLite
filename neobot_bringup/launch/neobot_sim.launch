@@ -47,6 +47,12 @@
     <rosparam file="$(find neobot_bringup)/params/dwa_local_planner_params.yaml" command="load" />
   </node>
 
+  <!-- Manager -->
+  <include file="$(find neobot_manager)/launch/neobot_manager.launch"/>
+
+  <!-- Comm -->
+  <!-- <include file="$(find neobot_comm)/launch/neobot_comm.launch"/> -->
+
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find neobot_bringup)/rviz/sim_start.rviz"/>
 
 </launch>

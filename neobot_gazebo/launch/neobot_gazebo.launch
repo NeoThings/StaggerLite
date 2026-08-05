@@ -3,7 +3,7 @@
   <!--  ************** GAZEBO Simulator ***************  -->
   <arg name="x_pos" default="0.0"/>
   <arg name="y_pos" default="0.0"/>
-  <arg name="z_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0565"/>
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
   <arg name="yaw" default="0"/>
@@ -18,7 +18,9 @@
   <!-- urdf xml robot description loaded on the Parameter Server-->
   <param name="robot_description" command="$(find xacro)/xacro $(find neobot_gazebo)/urdf/neobot_gazebo.xacro" /> 
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+  <!--publish (non-fixed) joint states-->
+  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>  -->
+
   <!-- start robot state publisher -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" >
     <param name="publish_frequency" type="double" value="50.0" />

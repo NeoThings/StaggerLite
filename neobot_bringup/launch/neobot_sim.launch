@@ -13,7 +13,7 @@
   <include file="$(find neobot_gazebo)/launch/neobot_gazebo.launch"/>
 
   <node name="map_server" pkg="map_server" type="map_server" 
-    args="$(find neobot_gazebo)/maps/HSH.yaml" output="screen">
+    args="$(find neobot_gazebo)/maps/square.yaml" output="screen">
     <param name="frame_id" value="map"/>
   </node>
 
@@ -25,30 +25,26 @@
     <param name="initial_pose_a"            value="$(arg yaw)"/>
   </node>
 
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <!-- MoveBase -->
+  <!-- <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <param name="controller_frequency" value="10.0" />
     <param name="controller_patience" value="15.0" />
 
-    <!-- Costmap -->
     <rosparam file="$(find neobot_bringup)/params/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find neobot_bringup)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find neobot_bringup)/params/global_costmap_params.yaml" command="load" />        
     <rosparam file="$(find neobot_bringup)/params/local_costmap_params.yaml" command="load" />
 
-  <!-- Global Planner -->
     <param name="base_global_planner" value="global_planner/GlobalPlanner" />
     <param name="planner_frequency" value="1.0" />
     <param name="planner_patience" value="5.0" />
     <rosparam file="$(find neobot_bringup)/params/global_planner_params.yaml" command="load" />
-
-    <!-- Local Planner -->
+    
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
     <rosparam file="$(find neobot_bringup)/params/dwa_local_planner_params.yaml" command="load" />
-  </node>
+  </node> -->
 
   <!-- Manager -->
-  <include file="$(find neobot_manager)/launch/neobot_manager.launch"/>
+  <!--include file="$(find neobot_manager)/launch/neobot_manager.launch"/-->
 
   <!-- Comm -->
   <!-- <include file="$(find neobot_comm)/launch/neobot_comm.launch"/> -->

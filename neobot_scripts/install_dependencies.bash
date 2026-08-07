@@ -3,7 +3,6 @@ cd ..
 sudo apt install ros-noetic-tf2-sensor-msgs ros-noetic-move-base-msgs
 git clone https://github.com/NeoThings/navigation.git
 git clone https://github.com/NeoThings/neobot_sensors.git
-#git clone https://github.com/NeoThings/neobot_models.git
 
 mkdir neobot_kits
 cd neobot_kits

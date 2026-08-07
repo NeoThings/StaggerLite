@@ -9,11 +9,15 @@
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
   <arg name="yaw" default="0"/>
+  <arg name="world_name" default="square"/>
+  <arg name="map_name" default="square"/>
 
-  <include file="$(find neobot_gazebo)/launch/neobot_gazebo.launch"/>
+  <include file="$(find neobot_gazebo)/launch/neobot_gazebo.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+  </include>
 
   <node name="map_server" pkg="map_server" type="map_server" 
-    args="$(find neobot_gazebo)/maps/square.yaml" output="screen">
+    args="$(find neobot_gazebo)/maps/$(arg map_name).yaml" output="screen">
     <param name="frame_id" value="map"/>
   </node>
 
@@ -25,7 +29,7 @@
     <param name="initial_pose_a"            value="$(arg yaw)"/>
   </node>
 
-  <!-- <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <param name="controller_frequency" value="10.0" />
     <param name="controller_patience" value="15.0" />
 
@@ -41,14 +45,12 @@
     
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
     <rosparam file="$(find neobot_bringup)/params/dwa_local_planner_params.yaml" command="load" />
-  </node> -->
+  </node>
 
-  <!-- Manager -->
-  <!--include file="$(find neobot_manager)/launch/neobot_manager.launch"/-->
+  <include file="$(find neobot_manager)/launch/neobot_manager.launch"/>
 
-  <!-- Comm -->
-  <!-- <include file="$(find neobot_comm)/launch/neobot_comm.launch"/> -->
+  <include file="$(find neobot_comm)/launch/neobot_comm.launch"/>
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find neobot_bringup)/rviz/sim_start.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find neobot_bringup)/rviz/neobot_sim.rviz"/>
 
 </launch>

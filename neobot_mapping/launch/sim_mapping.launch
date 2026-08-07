@@ -5,13 +5,13 @@
   <!--  ************** GAZEBO Simulator ***************  -->
   <arg name="x_pos" default="0.0"/>
   <arg name="y_pos" default="0.0"/>
-  <arg name="z_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0565"/>
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
   <arg name="yaw" default="0"/>
 
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
-  <arg name="world_name" default="$(find neobot_gazebo)/worlds/square.world"/>
+  <arg name="world_name" default="$(find neobot_gazebo)/worlds/corridor.world"/>
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
@@ -21,7 +21,8 @@
   <!-- urdf xml robot description loaded on the Parameter Server-->
   <param name="robot_description" command="$(find xacro)/xacro $(find neobot_gazebo)/urdf/neobot_gazebo.xacro" /> 
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
+  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> -->
+
   <!-- start robot state publisher -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" >
     <param name="publish_frequency" type="double" value="50.0" />

@@ -10,14 +10,17 @@
   <arg name="pitch" default="0"/>
   <arg name="yaw" default="0"/>
   <arg name="world_name" default="square"/>
-  <arg name="map_name" default="square"/>
+  <arg name="manager_state_file" default="$(find neobot_manager)/config/manager_state.yaml"/>
 
   <include file="$(find neobot_gazebo)/launch/neobot_gazebo.launch">
     <arg name="world_name" value="$(arg world_name)"/>
   </include>
 
-  <node name="map_server" pkg="map_server" type="map_server" 
-    args="$(find neobot_gazebo)/maps/$(arg map_name).yaml" output="screen">
+  <!-- Load map from manager_state.yaml: sites/<site>/<map>/<map>.yaml -->
+  <node name="map_server" pkg="map_server" type="map_server"
+        args="placeholder.yaml" output="screen"
+        launch-prefix="$(find neobot_bringup)/../neobot_scripts/run_map_server.bash">
+    <env name="NEOBOT_MANAGER_STATE" value="$(arg manager_state_file)"/>
     <param name="frame_id" value="map"/>
   </node>
 
@@ -46,7 +49,8 @@
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
     <rosparam file="$(find neobot_bringup)/params/dwa_local_planner_params.yaml" command="load" />
   </node>
-
+  
+  <!--manager and tcp server-->
   <include file="$(find neobot_manager)/launch/neobot_manager.launch"/>
 
   <include file="$(find neobot_comm)/launch/neobot_comm.launch"/>

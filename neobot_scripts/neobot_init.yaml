@@ -1,4 +1,0 @@
-# NeoBot bringup init config
-# Edit map_name to select which map map_server loads:
-#   $(find neobot_gazebo)/maps/<map_name>.yaml
-map_name: HSH

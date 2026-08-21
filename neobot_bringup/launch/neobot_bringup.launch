@@ -7,10 +7,8 @@
   <arg name="roll" default="0"/>
   <arg name="pitch" default="0"/>
   <arg name="yaw" default="0"/>
+  <arg name="manager_state_file" default="$(find neobot_manager)/config/manager_state.yaml"/>
 
-  <!-- Load init config (/neobot/map_name); map_server reads map_name from the same yaml -->
-  <rosparam file="$(find neobot_bringup)/../neobot_scripts/neobot_init.yaml" command="load" ns="neobot"/>
-  
   <include file="$(find neobot_description)/launch/neobot_description.launch"/>
 
   <include file="$(find neobot_core)/launch/neobot_core.launch"/>
@@ -19,11 +17,12 @@
 
   <include file="$(find bluesea2)/launch/lidar.launch"/>
 
-  <!-- args placeholder is replaced by run_map_server.bash using map_name from neobot_init.yaml -->
-  <node name="map_server" pkg="map_server" type="map_server" 
+  <!-- Load map from manager_state.yaml: sites/<site>/<map>/<map>.yaml -->
+  <node name="map_server" pkg="map_server" type="map_server"
         args="placeholder.yaml" output="screen"
         launch-prefix="$(find neobot_bringup)/../neobot_scripts/run_map_server.bash">
-        <param name="frame_id" value="map"/>
+    <env name="NEOBOT_MANAGER_STATE" value="$(arg manager_state_file)"/>
+    <param name="frame_id" value="map"/>
   </node>
 
   <node pkg="amcl" type="amcl" name="amcl" output="screen">
